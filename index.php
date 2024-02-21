@@ -477,27 +477,30 @@
     <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
 </body>
 
 <script>
     $(document).ready(function() {
         $('#contactForm').submit(function(e) {
-            e.preventDefault(); 
-      
+            e.preventDefault();
+
             var formData = $(this).serialize();
 
-           
             $.ajax({
                 type: 'POST',
                 url: 'forms/contact.php',
                 data: formData,
                 success: function(response) {
                     $('#responseMessage').html(response.message);
+                    $('#contactForm')[0].reset();
+                    setTimeout(() => {
+                        $('#responseMessage').html('');
+                    }, 5000);
                 },
                 error: function(xhr, status, error) {
                     console.error('Request failed:', error);
-                    $('#responseMessage').html('Oops! Something went wrong. Please try again later.');
+                    $('#responseMessage').html('Something went wrong. Please try again later.');
                 }
             });
         });

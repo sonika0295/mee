@@ -57,10 +57,35 @@ try {
 
   $mail->send();
   $response['status'] = 200;
-  $response['message'] = 'Email has been sent successfully!';
+  $response['message'] = 'Your message has been sent. Thank you!';
+  $mail->clearAddresses();
+
+  $mail->addAddress("sonikakurmi48@gmail.com", "Portfolio Contact");
+  $mail->isHTML(true);
+  $mail->Subject = $_POST['subject'];
+  $mailBody = "
+
+  <div style='color: white;'>
+    <p>Hello Sonika,</p>
+    My name is " . $toName . ".
+    
+    <p>" . trim($_POST['message']) . "</p>
+
+    <p>Thanks again for getting in touch. I'm looking forward to speaking with you soon!</p>
+
+    <p>Best Regards,<br>
+    " . $toName . ",<br>
+    " . $toMail . "</p>
+
+    </div>
+
+";
+  $mail->Body = $mailBody;
+
+  $mail->send();
 } catch (Exception $e) {
   $response['status'] = 400;
-  $response['message'] = 'Oops! Something went wrong. Please try again later.';
+  $response['message'] = 'Something went wrong. Please try again later.';
 }
 
 header('Content-Type: application/json');
