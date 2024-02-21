@@ -426,36 +426,38 @@
                         </div>
                     </div>
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                        <form method="post" role="form" class="php-email-form" id="contactForm">
+                        <form method="post" role="form" class="php-email-form" id="contactForm" onsubmit="return validateForm()">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="name">Your Name</label>
                                     <input type="text" name="name" class="form-control" id="name" required>
+                                    <div class="invalid-feedback">Please enter your name.</div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="name">Your Email</label>
+                                    <label for="email">Your Email</label>
                                     <input type="email" class="form-control" name="email" id="email" required>
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="name">Subject</label>
+                                <label for="subject">Subject</label>
                                 <input type="text" class="form-control" name="subject" id="subject" required>
+                                <div class="invalid-feedback">Please enter a subject.</div>
                             </div>
                             <div class="form-group">
-                                <label for="name">Message</label>
-                                <textarea class="form-control" name="message" rows="2" required></textarea>
+                                <label for="message">Message</label>
+                                <textarea class="form-control" name="message" id="message" rows="2" required></textarea>
+                                <div class="invalid-feedback">Please enter a message.</div>
                             </div>
                             <div class="my-3">
                                 <div class="loading">Loading</div>
-
-
-
                                 <div id="responseMessage"></div>
                             </div>
                             <div class="text-center">
                                 <button type="submit">Send Message</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -485,6 +487,10 @@
         $('#contactForm').submit(function(e) {
             e.preventDefault();
 
+            if (!validateForm()) {
+                return false;
+            }
+
             var formData = $(this).serialize();
 
             $.ajax({
@@ -503,6 +509,28 @@
                     $('#responseMessage').html('Something went wrong. Please try again later.');
                 }
             });
+        });
+
+        function validateForm() {
+            var form = document.getElementById('contactForm');
+            var isValid = true;
+
+            $(form).find('input, textarea').each(function() {
+                if (!this.checkValidity()) {
+                    $(this).addClass('is-invalid');
+                    isValid = false;
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $(this).addClass('is-valid');
+                }
+            });
+
+            return isValid;
+        }
+
+      $('#contactForm input, #contactForm textarea').focus(function() {
+            $(this).removeClass('is-invalid');
+            $(this).removeClass('is-valid');
         });
     });
 </script>
