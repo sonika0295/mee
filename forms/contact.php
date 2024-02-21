@@ -56,17 +56,12 @@ try {
 
 
   $mail->send();
-  $response['status'] = 'success';
+  $response['status'] = 200;
   $response['message'] = 'Email has been sent successfully!';
 } catch (Exception $e) {
-  $response['status'] = 'error';
+  $response['status'] = 400;
   $response['message'] = 'Oops! Something went wrong. Please try again later.';
 }
 
-
-$jsonResponse = json_encode($response);
-
-
-echo "<script>window.location.href='../index.php';</script>";
-exit();
-
+header('Content-Type: application/json');
+echo json_encode($response);
