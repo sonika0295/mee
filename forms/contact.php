@@ -1,10 +1,10 @@
 <?php
-require('C:/xampp/htdocs/mee/assets/vendor/PHPMailer/src/PHPMailer.php');
-require('C:/xampp/htdocs/mee/assets/vendor/PHPMailer/src/SMTP.php');
-require('C:/xampp/htdocs/mee/assets/vendor/PHPMailer/src/Exception.php');
+require('../assets/vendor/PHPMailer/src/PHPMailer.php');
+require('../assets/vendor/PHPMailer/src/SMTP.php');
+require('../assets/vendor/PHPMailer/src/Exception.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+
 use PHPMailer\PHPMailer\Exception;
 
 
