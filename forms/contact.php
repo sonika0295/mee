@@ -23,38 +23,44 @@ try {
 
 
   $mail->setFrom('sonikakurmi48@gmail.com', 'Sonika Kurmi');
-  $mail->addAddress(isset($_POST['email']) ?? 'sona8821870295@gmail.com', isset($_POST['name']) ?? 'Users');
+  $toMail = isset($_POST['email']) ? $_POST['email'] : 'sona8821870295@gmail.com';
+  $toName = isset($_POST['name']) ? ucwords($_POST['name']) : 'User';
+
+  $mail->addAddress($toMail, $toName);
 
 
   $mail->isHTML(true);
   $mail->Subject = 'Thank You for Contacting Me';
 
+  $madBody = "
+  <div style='color: white;'>
+    <p>Hello " . $toName . ",</p>
+    
+    <p>Thank you for reaching out to me! I'm glad you took the time to contact me through my website.</p>
+    
+    <p>Your message means a lot, and I appreciate the opportunity to connect with you. I'll do my best to respond to your inquiry as soon as possible.</p>
+    
+    <p>In the meantime, feel free to explore more of my website. If you have any further questions or need assistance, don't hesitate to ask.</p>
+    
+    <p>Thanks again for getting in touch. I'm looking forward to speaking with you soon!</p>
+    
+    <p>Best Regards,<br>
+    Sonika Kurmi<br>
+    Backend Developer<br>
+    <a href='mailto:sonikakurmi48@gmail.com'>sonikakurmi48@gmail.com</a></p>
+    <img src='https://t3.ftcdn.net/jpg/01/32/12/26/360_F_132122695_cNuq5ACUnfSfqmRgJSP1rRiGVHdVedl6.webp' alt='Thank You Image'>
+    </div>
+  ";
 
-  $mail->Body = 'Sonika test This is the HTML message body';
+  $mail->Body = $madBody;
 
 
   $mail->send();
-  echo 'Email has been sent successfully';
+  return true;
 } catch (Exception $e) {
-  echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  echo "Email could not be sent.";
+  exit;
 }
 
-<pre>
 
-Hello <?php isset($_POST['name']) ?? 'Users' ?>,
-
-Thank you for reaching out to me! I'm glad you took the time to contact me through my website.
-
-Your message means a lot, and I appreciate the opportunity to connect with you. I'll do my best to respond to your inquiry as soon as possible.
-
-In the meantime, feel free to explore more of my website. If you have any further questions or need assistance, don't hesitate to ask.
-
-Thanks again for getting in touch. I'm looking forward to speaking with you soon!
-
-Best Regards,
-Sonika Kurmi
-Backend Developer
-sonikakurmi48@gmail.com
-
-</pre>
 // }
