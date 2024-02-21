@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 
 
 $mail = new PHPMailer(true);
-
+$response = array();
 
 try {
 
@@ -56,11 +56,17 @@ try {
 
 
   $mail->send();
-  return true;
+  $response['status'] = 'success';
+  $response['message'] = 'Email has been sent successfully!';
 } catch (Exception $e) {
-  echo "Email could not be sent.";
-  exit;
+  $response['status'] = 'error';
+  $response['message'] = 'Oops! Something went wrong. Please try again later.';
 }
 
 
-// }
+$jsonResponse = json_encode($response);
+
+
+echo "<script>window.location.href='../index.php';</script>";
+exit();
+
