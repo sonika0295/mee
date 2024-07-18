@@ -1110,3 +1110,22 @@ section {
   width: 100%;
   
 }
+@media screen and (orientation: landscape) {
+  .carousel img {
+    height: 80vh;
+  }
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #000 !important; 
+    border-radius: 50% !important; 
+}
+
+.pt-md-6{
+  padding-top: 4.5rem !important;
+}
+.pt-md-5-exp{
+  padding-top: 3.5rem !important;
+}
