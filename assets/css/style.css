@@ -288,6 +288,9 @@ h6 {
   #hero {
     background-attachment: fixed;
   }
+  .exp-lg,.edu-lg{
+    display: block !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -295,7 +298,9 @@ h6 {
     font-size: 28px;
     line-height: 36px;
   }
-
+  .exp-sm,.edu-sm{
+    display: block !important;
+  }
   #hero h2 {
     font-size: 18px;
     line-height: 24px;
